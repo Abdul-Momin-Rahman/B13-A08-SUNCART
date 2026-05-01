@@ -3,10 +3,11 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import SunImg from '@/assets/sun.svg'
 import NavLink from '../NavLink';
-import { Button } from '@heroui/react';
+import { Avatar, Button } from '@heroui/react';
 import { CiMenuBurger, CiMenuFries } from 'react-icons/ci';
 import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
 
 
 const Navbar = () => {
@@ -18,6 +19,10 @@ const Navbar = () => {
     const handleClick = () => {
         setOpen(false);
     }
+
+    const { data: session } = authClient.useSession()
+    const user = session?.user;
+    console.log(user)
 
     return (
         <div className='bg-[#fff6e9]  flex items-center h-15  lg:h-17 sticky top-0 z-50'>
@@ -37,21 +42,35 @@ const Navbar = () => {
                 </div>
 
                 <div className='md:flex gap-2 items-center justify-between hidden'>
-                    <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>
-                    <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/register')}>Register</Button>
+                    {user ? <Avatar>
+                        <Avatar.Image alt={user.name} src={user.image} />
+                        <Avatar.Fallback>Hello</Avatar.Fallback>
+                    </Avatar> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/register')}>Register</Button>}
+                    {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
 
                 </div>
 
 
+
+
+
                 <div className="md:hidden ">
 
-                    <button
-                        onClick={() => setOpen(!open)}
-                        className="px-4 py-2 bg-[#fffbf557] rounded"
-                    >
-                        {open ? <CiMenuFries /> : <CiMenuBurger />}
-                    </button>
+                    <div className='flex'>
+                        <button
+                            onClick={() => setOpen(!open)}
+                            className="px-4 py-2 bg-[#fffbf557] rounded"
+                        >
+                            {open ? <CiMenuFries /> : <CiMenuBurger />}
+                        </button>
 
+                        <div className='mr-3'>
+                            <Avatar>
+                                <Avatar.Image alt={user?.name} src={user?.image} />
+                                <Avatar.Fallback>Hello</Avatar.Fallback>
+                            </Avatar>
+                        </div>
+                    </div>
 
                     {open && (
                         <div className="absolute right-0  mt-3  w-25 py-2 pl-2  bg-[#FFFBF5] shadow-lg rounded">
@@ -71,15 +90,18 @@ const Navbar = () => {
                                     My Profile
                                 </Link>
 
-                                <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+                                {user ? <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+
+                                    Logout
+                                </Link> : <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
 
                                     Login
-                                </Link>
+                                </Link>}
 
-                                <Link href={'/register'} className={`${path == '/register' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+                                {user ? "" : <Link href={'/register'} className={`${path == '/register' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
 
                                     Register
-                                </Link>
+                                </Link>}
                             </ul>
                         </div>
                     )}

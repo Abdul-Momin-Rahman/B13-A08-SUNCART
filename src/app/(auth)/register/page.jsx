@@ -1,7 +1,9 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { Bounce, Slide, toast } from "react-toastify";
 
 
 
@@ -15,12 +17,49 @@ export default function RegisterPage() {
         formState: { errors },
     } = useForm()
 
-    const handleRegister = (data) => {
+    const handleRegister = async (data) => {
 
-        console.log(data);
+        const { name, email, photo, password } = data;
+
+        const { data: res, error } = await authClient.signUp.email({
+            name: name, // required
+            email: email, // required
+            password: password, // required
+            image: photo,
+            callbackURL: "/",
+        });
+
+        console.log(res, error)
+
+        if (error) {
+            toast.error(`${error.message}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+        if (res) {
+            toast.success('Sign Up Successful', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+        }
     };
 
-    const passlength = watch("password");
+
 
 
 

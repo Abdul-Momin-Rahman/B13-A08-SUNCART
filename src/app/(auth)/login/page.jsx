@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
@@ -10,10 +11,21 @@ export default function LoginPage() {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
 
-    const handleLogin = (data) => {
-        console.log(data)
+    const handleLogin = async (data) => {
 
+        const {email,password} = data;
+
+        const { data:res , error } = await authClient.signIn.email({
+            email: email, // required
+            password: password, // required
+            rememberMe: true,
+            callbackURL: "/",
+        });
+
+        console.log(data, error)
     };
+
+
 
     return (
         <div className=" h-screen flex items-center justify-center  mx-auto max-w-xl">

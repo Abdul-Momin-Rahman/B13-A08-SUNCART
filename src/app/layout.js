@@ -1,13 +1,12 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
+import { ToastContainer } from "react-toastify";
 
 
 const poppins = Poppins({
-  variable : "--font-poppins",
-  subsets : ["latin"],
-  weight : ['100','200','300','400','500','600','700','800','900']
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
 
 
@@ -21,11 +20,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme = "suncart"
+      data-theme="suncart"
       className={`h-full antialiased poppins ${poppins.className}`}
     >
       <body className="min-h-screen flex flex-col">
         {children}
+        <ToastContainer />
       </body>
     </html>
   );
