@@ -1,4 +1,6 @@
 'use client'
+
+
 import Image from 'next/image';
 import React, { useState } from 'react';
 import SunImg from '@/assets/sun.svg'
@@ -22,7 +24,7 @@ const Navbar = () => {
 
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
-    console.log(user)
+    // console.log(user)
 
     return (
         <div className='bg-[#fff6e9]  flex items-center h-15  lg:h-17 sticky top-0 z-50'>

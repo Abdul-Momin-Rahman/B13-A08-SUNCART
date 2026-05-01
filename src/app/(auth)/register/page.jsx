@@ -6,11 +6,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Bounce, Slide, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { BsGoogle } from "react-icons/bs";
 
 
 
 
 export default function RegisterPage() {
+
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    }
+    const router = useRouter();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -33,7 +42,7 @@ export default function RegisterPage() {
             callbackURL: "/",
         });
 
-        console.log(res, error)
+        // console.log(res, error)
 
         if (error) {
             toast.error(`${error.message}`, {
@@ -129,7 +138,7 @@ export default function RegisterPage() {
                         <div className="relative">
                             <label className="text-sm text-gray-600">Password</label>
                             <input
-                                type={showPassword ? "text" :"password"}
+                                type={showPassword ? "text" : "password"}
                                 {...register("password", {
                                     required: "Password is required for Registration", minLength: {
                                         value: 8,
@@ -151,10 +160,18 @@ export default function RegisterPage() {
                         <button
                             type="submit"
                             className="w-full text-[#D85A30] bg-white  py-2 rounded-lg hover:bg-[#D85A30] hover:text-white cursor-pointer transition mt-10 text-lg"
+                            onClick={() => router.push('/login')}
                         >
                             Register
                         </button>
                     </form>
+
+
+                    <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer mt-6"
+                        onClick={handleGoogleSignIn}>
+                        <span className="text-lg"><BsGoogle /></span>
+                        Continue with Google
+                    </button>
 
 
                     <p className="text-center text-sm mt-6">

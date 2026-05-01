@@ -6,9 +6,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
 import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
+import { Bounce, Slide, toast } from "react-toastify";
 
 
 export default function LoginPage() {
+
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    }
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -16,16 +23,43 @@ export default function LoginPage() {
 
     const handleLogin = async (data) => {
 
-        const {email,password} = data;
+        const { email, password } = data;
 
-        const { data:res , error } = await authClient.signIn.email({
+        const { data: res, error } = await authClient.signIn.email({
             email: email, // required
             password: password, // required
             rememberMe: true,
             callbackURL: "/",
         });
 
-        console.log(data, error)
+        if (error) {
+            toast.error(`${error.message}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+        if (res) {
+            toast.success('Login Successful', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+        }
+
+
     };
 
 
@@ -74,7 +108,7 @@ export default function LoginPage() {
                                 className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700 text-white outline-none"
 
                             />
-                            <span className="absolute right-5 top-10 text-white" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash/> :<FaEye/>}</span>
+                            <span className="absolute right-5 top-10 text-white" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                             {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
                         </div>
 
@@ -101,7 +135,8 @@ export default function LoginPage() {
                     </div>
 
 
-                    <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer">
+                    <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer"
+                        onClick={handleGoogleSignIn}>
                         <span className="text-lg"><BsGoogle /></span>
                         Continue with Google
                     </button>
