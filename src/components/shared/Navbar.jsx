@@ -20,7 +20,7 @@ const Navbar = () => {
         setOpen(false);
     }
 
-    const { data: session } = authClient.useSession()
+    const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
     console.log(user)
 
@@ -46,7 +46,8 @@ const Navbar = () => {
                         <Avatar.Image alt={user.name} src={user.image} />
                         <Avatar.Fallback>Hello</Avatar.Fallback>
                     </Avatar> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/register')}>Register</Button>}
-                    {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
+                    {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={async() => {await authClient.signOut() 
+                        redirect('/login')}}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
 
                 </div>
 
@@ -65,10 +66,10 @@ const Navbar = () => {
                         </button>
 
                         <div className='mr-3'>
-                            <Avatar>
+                            {isPending ?  <span className="loading loading-ring loading-xl"></span> : <Avatar>
                                 <Avatar.Image alt={user?.name} src={user?.image} />
-                                <Avatar.Fallback>Hello</Avatar.Fallback>
-                            </Avatar>
+                                <Avatar.Fallback>JD</Avatar.Fallback>
+                            </Avatar>}
                         </div>
                     </div>
 

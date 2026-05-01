@@ -2,13 +2,17 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Bounce, Slide, toast } from "react-toastify";
 
 
 
 
 export default function RegisterPage() {
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const {
         register,
@@ -122,10 +126,10 @@ export default function RegisterPage() {
                         </div>
 
 
-                        <div>
+                        <div className="relative">
                             <label className="text-sm text-gray-600">Password</label>
                             <input
-                                type="password"
+                                type={showPassword ? "text" :"password"}
                                 {...register("password", {
                                     required: "Password is required for Registration", minLength: {
                                         value: 8,
@@ -136,6 +140,7 @@ export default function RegisterPage() {
                                 className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700  text-white outline-none"
 
                             />
+                            <span className="absolute right-5 top-10 text-white " onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                             {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
                         </div>
 

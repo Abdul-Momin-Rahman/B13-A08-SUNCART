@@ -2,12 +2,15 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 export default function LoginPage() {
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm()
 
@@ -62,15 +65,16 @@ export default function LoginPage() {
                         </div>
 
 
-                        <div>
+                        <div className="relative">
                             <label className="text-sm text-gray-600">Password</label>
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 {...register("password", { required: "Password is required for Login" })}
                                 placeholder="********"
                                 className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700 text-white outline-none"
 
                             />
+                            <span className="absolute right-5 top-10 text-white" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash/> :<FaEye/>}</span>
                             {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
                         </div>
 
