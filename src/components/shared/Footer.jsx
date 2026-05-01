@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <footer className="bg-[#1A1108] text-white px-10 pt-12 pb-6 mt-auto">
 
-            <div className=" grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr] items-center justify-items-center gap-10 mb-10 container mx-auto">
+            <div className=" grid grid-cols-1 md:grid-cols-3 items-center gap-10 md:gap-50 mb-10 container mx-auto">
 
                 {/* left */}
                 <div className=' w-full '>
@@ -115,7 +115,7 @@ const Footer = () => {
                 </div>
 
                 {/* right */}
-                <div className=' w-full '>
+                <div className='md:ml-10  w-full '>
                     <div>
                         <p className="text-[11px] font-semibold uppercase tracking-widest text-[#EF9F27] mb-3">
                             Quick Links
