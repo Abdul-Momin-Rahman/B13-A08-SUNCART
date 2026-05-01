@@ -69,12 +69,11 @@ export default function SummerCareTips() {
             Tips & Advice
           </span>
           <h2
-            className="text-4xl font-bold text-[#1A1108] dark:text-[#FAC775] mb-3"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            className="text-4xl font-bold text-[#1A1108] mb-3"
           >
             Summer Care Tips
           </h2>
-          <p className="text-[#5F5E5A] dark:text-[#B4B2A9] text-sm max-w-md mx-auto leading-relaxed">
+          <p className="text-[#5F5E5A]  text-sm max-w-md mx-auto leading-relaxed">
             Stay cool, protected, and glowing all season long with these essential summer tips.
           </p>
         </div>
@@ -84,7 +83,7 @@ export default function SummerCareTips() {
           {tips.map((tip) => (
             <div
               key={tip.id}
-              className="relative overflow-hidden bg-[#FFFBF5] dark:bg-[#2C1E06] border-2 border-[#FAC775] dark:border-[#3A2A0A] rounded-2xl p-5 group hover:border-[#EF9F27] transition-colors duration-200"
+              className="relative overflow-hidden bg-[#FFFBF5]  border-2 border-[#FAC775]  rounded-2xl p-5 group hover:border-[#EF9F27] transition-colors duration-200"
             >
               
               <div
@@ -99,10 +98,10 @@ export default function SummerCareTips() {
               </div>
 
               
-              <h3 className="text-[14px] font-semibold text-[#1A1108] dark:text-[#FAC775] mb-2">
+              <h3 className="text-[14px] font-semibold text-[#1A1108]  mb-2">
                 {tip.title}
               </h3>
-              <p className="text-[13px] text-[#5F5E5A] dark:text-[#888780] leading-relaxed">
+              <p className="text-[13px] text-[#5F5E5A]  leading-relaxed">
                 {tip.desc}
               </p>
             </div>

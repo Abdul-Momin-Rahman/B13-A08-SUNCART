@@ -20,7 +20,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-[#FFFBF5]  flex items-center h-15 lg:h-17 sticky top-0 z-50'>
+        <div className='bg-[#fff6e9]  flex items-center h-15  lg:h-17 sticky top-0 z-50'>
             <div className='container mx-auto flex items-center justify-between '>
 
 

@@ -11,6 +11,7 @@ const slides = [
         subtitle: "Up to 50% OFF",
         desc: "Sunglasses, outfits, skincare & more",
         img: "/images/summer1.jpg",
+        para : "Free delivery over ৳1500 • Easy returns",
 
 
 
@@ -29,7 +30,7 @@ const slides = [
         img: "/images/summer2.jpg",
 
 
-
+        para : "100% Authentic Product, Try it Out today",
         features: ["Best Sellers", "High Quality", "Top Rated"],
 
         ctaPrimary: "View Deals",
@@ -45,7 +46,7 @@ const slides = [
         img: "/images/summer3.jpg",
 
 
-
+        para : "New Collection has arrived, Check it Out",
         features: ["Lightweight", "Comfort Fit", "Stylish"],
 
         ctaPrimary: "Discover",
@@ -69,35 +70,35 @@ const HeroSection = () => {
                     <SwiperSlide key={i}>
 
                         <div
-                            className="h-full bg-cover  bg-top bg-no-repeat"
+                            className="h-full w-full bg-cover bg-top bg-no-repeat"
                             style={{ backgroundImage: `url(${slide.img})` }}
                         >
 
                             <div className="w-full h-full bg-black/60 flex items-center">
                                 <div className="max-w-7xl mx-auto px-6 text-white ">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                                    <h1 className="text-3xl md:text-6xl font-bold mb-4 text-center sm:text-left">
                                         {slide.title}
                                     </h1>
-                                    <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-[#BA7517]">
+                                    <h2 className="text-xl md:text-3xl font-semibold mb-3 text-[#BA7517] text-center sm:text-left">
                                         {slide.subtitle}
                                     </h2>
-                                    <p className="mb-6 text-lg">{slide.desc}</p>
+                                    <p className="mb-6 text-lg text-center sm:text-left">{slide.desc}</p>
 
                                     <div className="flex gap-4">
-                                        <button className="bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer">
+                                        <button className="hidden sm:block bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer">
                                             {slide.ctaPrimary}
                                         </button>
-                                        <button className="border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition cursor-pointer">
+                                        <button className="hidden sm:block border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition cursor-pointer">
                                             {slide.ctaSecondary}
                                         </button>
                                     </div>
 
 
                                     <p className="mt-4 text-lg opacity-80 text-center sm:text-left">
-                                        Free delivery over ৳1500 • Easy returns
+                                        {slide.para}
                                     </p>
 
-                                    <div className="flex gap-3 mt-6 flex-wrap">
+                                    <div className="flex gap-3 mt-6 flex-wrap justify-center sm:justify-start">
                                         {slide.features.map((f, idx) => (
                                             <span
                                                 key={idx}
