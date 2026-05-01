@@ -57,7 +57,7 @@ const slides = [
 
 const HeroSection = () => {
     return (
-        <section className="w-full h-screen">
+        <section className="w-full h-[95vh]">
             <Swiper
                 modules={[Autoplay, Pagination]}
                 autoplay={{ delay: 3000 }}
@@ -69,22 +69,22 @@ const HeroSection = () => {
                     <SwiperSlide key={i}>
 
                         <div
-                            className="h-full bg-cover  bg-top bg-no-repeat flex items-center justify-between gap-160"
+                            className="h-full bg-cover  bg-top bg-no-repeat"
                             style={{ backgroundImage: `url(${slide.img})` }}
                         >
 
                             <div className="w-full h-full bg-black/60 flex items-center">
-                                <div className="max-w-7xl mx-auto px-6 text-white">
+                                <div className="max-w-7xl mx-auto px-6 text-white ">
                                     <h1 className="text-4xl md:text-6xl font-bold mb-4">
                                         {slide.title}
                                     </h1>
-                                    <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-yellow-400">
+                                    <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-[#BA7517]">
                                         {slide.subtitle}
                                     </h2>
                                     <p className="mb-6 text-lg">{slide.desc}</p>
 
                                     <div className="flex gap-4">
-                                        <button className="bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer">
+                                        <button className="bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer">
                                             {slide.ctaPrimary}
                                         </button>
                                         <button className="border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition cursor-pointer">
