@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
@@ -12,6 +13,10 @@ import { Bounce, Slide, toast } from "react-toastify";
 export default function LoginPage() {
 
 
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const next = searchParams.get("next");
+
     const [loading, setLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -20,6 +25,7 @@ export default function LoginPage() {
         setGoogleLoading(true);
         const data = await authClient.signIn.social({
             provider: "google",
+            callbackURL : next || "/",
         });
 
         setGoogleLoading(false);
@@ -39,7 +45,7 @@ export default function LoginPage() {
             email: email, // required
             password: password, // required
             // rememberMe: true,
-            callbackURL: "/",
+            callbackURL: next || "/",
         });
 
         setLoading(false);

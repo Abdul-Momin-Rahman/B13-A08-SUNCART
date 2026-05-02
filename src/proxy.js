@@ -20,8 +20,19 @@ export const proxy = async (request) => {
         return NextResponse.next();
     }
 
-    if (!session) return NextResponse.redirect(new URL('/login', request.url))
+    if (pathname.startsWith("/products")) {
 
+        if (!session) {
+
+            const loginUrl = new URL("/login", request.url);
+
+            loginUrl.searchParams.set("next" , pathname);
+
+            return NextResponse.redirect(loginUrl);
+        }
+
+    }
+    
     return NextResponse.next();
 }
 
