@@ -5,7 +5,6 @@ import { Spinner } from '@heroui/react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
 import { Slide, toast } from 'react-toastify';
 
 
@@ -25,10 +24,8 @@ const ProductDetailsPage = () => {
 
             const data = await getProductsDataById(id);
 
-            setTimeout(() => {
-                setProduct(data);
-                setLoading(false);
-            }, 500);
+            setProduct(data);
+            setLoading(false);
         };
 
         if (id) fetchProduct();

@@ -128,14 +128,14 @@ const UpdateProfilePage = () => {
                             <button
                                 type="button"
                                 onClick={() => router.back()}
-                                className="flex-1 h-11 border border-[#FAC775] text-[#5F5E5A] hover:border-[#EF9F27] hover:text-[#BA7517] transition-colors duration-200 text-[13px] font-semibold rounded-full"
+                                className="flex-1 h-11 border border-[#FAC775] text-[#5F5E5A] hover:border-[#EF9F27] hover:text-[#BA7517] transition-colors duration-200 text-[13px] font-semibold rounded-full cursor-pointer"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 h-11 bg-[#EF9F27] hover:bg-[#FAC775] text-[#1A1108] text-[13px] font-semibold rounded-full transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                                className="flex-1 h-11 bg-[#EF9F27] hover:bg-[#FAC775] text-[#1A1108] text-[13px] font-semibold rounded-full transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                             >
                                 {loading ? 'Updating...' : 'Update Information'}
                             </button>

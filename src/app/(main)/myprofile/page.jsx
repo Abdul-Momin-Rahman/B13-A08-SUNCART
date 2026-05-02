@@ -9,11 +9,11 @@ import { useEffect } from "react";
 
 
 
-function Avatar({ user, size }) {
+const Avatar = ({ user, size }) => {
 
 
     const initials = user?.name
-        ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
+        ? user?.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
         : user?.email[0].toUpperCase() || "U";
 
     if (user?.image) {
@@ -44,7 +44,7 @@ function Avatar({ user, size }) {
     );
 }
 
-function InfoRow({ label, value, icon }) {
+const InfoRow = ({ label, value, icon }) => {
     return (
         <div className="flex items-center gap-4 py-4 border-b border-[#FAC775]/40  last:border-0">
             <div className="w-9 h-9 rounded-xl bg-[#FAEEDA]  flex items-center justify-center shrink-0">
@@ -62,7 +62,7 @@ function InfoRow({ label, value, icon }) {
     );
 }
 
-export default function MyProfilePage() {
+const MyProfilePage = () =>  {
 
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
@@ -84,7 +84,7 @@ export default function MyProfilePage() {
 
     const handleSignOut = async () => {
         await authClient.signOut();
-        router.push("/login");
+        router.replace("/login");
     };
 
 
@@ -143,7 +143,7 @@ export default function MyProfilePage() {
                         >
                             {user?.name || "—"}
                         </h2>
-                        <p className="text-[13px] text-[#888780]">{user.email}</p>
+                        <p className="text-[13px] text-[#888780]">{user?.email}</p>
                     </div>
                 </div>
 
@@ -163,7 +163,7 @@ export default function MyProfilePage() {
 
                     <InfoRow
                         label="Email Address"
-                        value={user?.email}
+                        value={user?.email || "-"}
                         icon={
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BA7517" strokeWidth="2" strokeLinecap="round">
                                 <path d="M3 8l9 6 9-6" />
@@ -189,7 +189,7 @@ export default function MyProfilePage() {
 
                     <button
                         onClick={handleSignOut}
-                        className="flex-1 flex items-center justify-center gap-2 h-11 border border-[#D85A30]/50 text-[#D85A30]  hover:bg-[#D85A30] hover:text-white hover:border-[#D85A30] transition-colors duration-200 text-[13px] font-semibold rounded-full px-3 py-2"
+                        className="flex-1 flex items-center justify-center gap-2 h-11 border border-[#D85A30]/50 text-[#D85A30] cursor-pointer  hover:bg-[#D85A30] hover:text-white hover:border-[#D85A30] transition-colors duration-200 text-[13px] font-semibold rounded-full px-3 py-2"
                     >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                             <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -204,3 +204,5 @@ export default function MyProfilePage() {
         </div>
     );
 }
+
+export default MyProfilePage;

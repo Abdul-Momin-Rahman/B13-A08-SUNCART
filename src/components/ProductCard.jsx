@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
                 </div>
 
             </div>
-            <button className='text-white text-lg bg-[#BA7517] w-full text-center py-2 px-3 rounded-2xl'>View Details</button>
+            <button className='text-white text-lg bg-[#BA7517] w-full text-center py-2 px-3 rounded-2xl cursor-pointer'>View Details</button>
         </Link>
     );
 };
