@@ -43,7 +43,7 @@ const Navbar = () => {
                 <div className='md:flex gap-8 items-center justify-between hidden'>
                     <NavLink href={'/'}>Home</NavLink>
                     <NavLink href={'/products'}>Products</NavLink>
-                    <NavLink href={'/myprofile'}>My Profile</NavLink>
+                    <NavLink href={user ? '/myprofile' : '/login'}>My Profile</NavLink>
                 </div>
 
                 <div className='md:flex gap-2 items-center justify-between hidden'>

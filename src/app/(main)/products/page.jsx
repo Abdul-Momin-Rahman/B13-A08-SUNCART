@@ -4,9 +4,6 @@ import React from 'react';
 
 const ProductPage = async () => {
 
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-    await delay(1000); // wait 1 sec
     const productData = await getProductsData();
 
     return (
