@@ -7,7 +7,7 @@ import { auth } from "./lib/auth";
 
 export const proxy = async (request) => {
 
-    const { pathname } = request.nextUrl;
+    const pathname = request.nextUrl?.pathname;
 
     const session = await auth.api.getSession({
         headers: await headers()
@@ -20,19 +20,15 @@ export const proxy = async (request) => {
         return NextResponse.next();
     }
 
-    if (pathname.startsWith("/products")) {
-
+    if (pathname && pathname.startsWith("/products")) {
         if (!session) {
-
             const loginUrl = new URL("/login", request.url);
-
-            loginUrl.searchParams.set("next" , pathname);
+            loginUrl.searchParams.set("next", pathname);
 
             return NextResponse.redirect(loginUrl);
         }
-
     }
-    
+
     return NextResponse.next();
 }
 
