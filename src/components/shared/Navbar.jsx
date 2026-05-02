@@ -50,9 +50,13 @@ const Navbar = () => {
                     {user ? <Avatar>
                         <Avatar.Image alt={user.name} src={user.image} />
                         <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
-                    </Avatar> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => route.push('/register')}>Register</Button>}
-                    {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={async() => {await authClient.signOut() 
-                        redirect('/login')}}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
+                    </Avatar> :
+                        <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => route.push('/register')}>Register</Button>}
+
+                    {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={async () => {
+                        await authClient.signOut()
+                        redirect('/login')
+                    }}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
 
                 </div>
 
@@ -71,10 +75,10 @@ const Navbar = () => {
                         </button>
 
                         <div className='mr-3'>
-                            {isPending ?  <span className="loading loading-ring loading-xl"></span> : <Avatar>
+                            {user ? isPending ? <span className="loading loading-ring loading-xl"></span> : <Avatar>
                                 <Avatar.Image alt={user?.name} src={user?.image} />
-                                <Avatar.Fallback>JD</Avatar.Fallback>
-                            </Avatar>}
+                                <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
+                            </Avatar> : null}
                         </div>
                     </div>
 
@@ -91,12 +95,20 @@ const Navbar = () => {
                                     Products
                                 </Link>
 
-                                <Link href={'/myprofile'} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+                                <Link href={user? "/myprofile" : "/login"} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={() => {
+                                    handleClick
+                                    
+
+                                }}>
 
                                     My Profile
                                 </Link>
 
-                                {user ? <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+                                {user ? <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={async () => {
+                                    handleClick
+                                    await authClient.signOut()
+                                    redirect('/login')
+                                }}>
 
                                     Logout
                                 </Link> : <Link href={'/login'} className={`${path == '/login' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>

@@ -35,7 +35,7 @@ export default function ProductsLoading() {
                             {/* Image area */}
                             <div className="relative h-52 bg-[#FAC775]/20 dark:bg-[#3A2A0A] animate-pulse">
                                 {/* Shimmer overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#EF9F27]/10 to-transparent animate-[shimmer_1.5s_infinite]" />
+                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#EF9F27]/10 to-transparent animate-[shimmer_1.5s_infinite]" />
                                 {/* Placeholder sun icon */}
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <svg
