@@ -11,10 +11,18 @@ import { Bounce, Slide, toast } from "react-toastify";
 
 export default function LoginPage() {
 
+
+    const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
+
     const handleGoogleSignIn = async () => {
+
+        setGoogleLoading(true);
         const data = await authClient.signIn.social({
             provider: "google",
         });
+
+        setGoogleLoading(false);
     }
 
     const [showPassword, setShowPassword] = useState(false);
@@ -23,14 +31,18 @@ export default function LoginPage() {
 
     const handleLogin = async (data) => {
 
+        setLoading(true);
+
         const { email, password } = data;
 
         const { data: res, error } = await authClient.signIn.email({
             email: email, // required
             password: password, // required
-            rememberMe: true,
+            // rememberMe: true,
             callbackURL: "/",
         });
+
+        setLoading(false);
 
         if (error) {
             toast.error(`${error.message}`, {
@@ -120,10 +132,10 @@ export default function LoginPage() {
 
 
                         <button
-                            type="submit"
+                            type="submit" disabled={loading}
                             className="w-full text-lg bg-white text-[#D85A30] py-2 rounded-lg hover:bg-[#D85A30] hover:text-white transition cursor-pointer"
                         >
-                            Login
+                            {loading ? <span className="loading loading-spinner loading-md"></span> : "Login"}
                         </button>
                     </form>
 
@@ -136,9 +148,10 @@ export default function LoginPage() {
 
 
                     <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer"
-                        onClick={handleGoogleSignIn}>
-                        <span className="text-lg"><BsGoogle /></span>
-                        Continue with Google
+                        onClick={handleGoogleSignIn} disabled={googleLoading}>
+                        {googleLoading ? <span className="loading loading-spinner loading-md"></span> :
+                            <><span className="text-lg"><BsGoogle /></span>
+                                <span>Continue with Google</span></>}
                     </button>
 
                     <p className="text-center text-sm mt-6">

@@ -10,9 +10,12 @@ import { CiMenuBurger, CiMenuFries } from 'react-icons/ci';
 import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 
 const Navbar = () => {
+
+    const route = useRouter();
 
     const path = usePathname();
 
@@ -46,8 +49,8 @@ const Navbar = () => {
                 <div className='md:flex gap-2 items-center justify-between hidden'>
                     {user ? <Avatar>
                         <Avatar.Image alt={user.name} src={user.image} />
-                        <Avatar.Fallback>Hello</Avatar.Fallback>
-                    </Avatar> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/register')}>Register</Button>}
+                        <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
+                    </Avatar> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => route.push('/register')}>Register</Button>}
                     {user ? <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={async() => {await authClient.signOut() 
                         redirect('/login')}}>Logout</Button> : <Button variant="ghost" className={"hover:bg-[#EF9F27]"} onClick={() => redirect('/login')}>Login</Button>}
 

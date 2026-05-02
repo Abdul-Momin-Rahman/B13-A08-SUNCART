@@ -14,11 +14,19 @@ import { BsGoogle } from "react-icons/bs";
 
 export default function RegisterPage() {
 
+    const [loading ,setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
+
     const handleGoogleSignIn = async () => {
+        
+        setGoogleLoading(true);
         const data = await authClient.signIn.social({
             provider: "google",
         });
+
+        setGoogleLoading(false);
     }
+
     const router = useRouter();
 
     const [showPassword, setShowPassword] = useState(false);
@@ -32,9 +40,11 @@ export default function RegisterPage() {
 
     const handleRegister = async (data) => {
 
+        setLoading(true);
+
         const { name, email, photo, password } = data;
 
-        const { data: res, error } = await authClient.signUp.email({
+        const { data: res, error  } = await authClient.signUp.email({
             name: name, // required
             email: email, // required
             password: password, // required
@@ -42,7 +52,7 @@ export default function RegisterPage() {
             callbackURL: "/",
         });
 
-        // console.log(res, error)
+        setLoading(false);
 
         if (error) {
             toast.error(`${error.message}`, {
@@ -69,6 +79,8 @@ export default function RegisterPage() {
                 theme: "light",
                 transition: Slide,
             });
+
+            router.push('/login')
         }
     };
 
@@ -158,19 +170,21 @@ export default function RegisterPage() {
 
 
                         <button
+                            disabled = {loading}
                             type="submit"
                             className="w-full text-[#D85A30] bg-white  py-2 rounded-lg hover:bg-[#D85A30] hover:text-white cursor-pointer transition mt-10 text-lg"
-                            onClick={() => router.push('/login')}
+                            
                         >
-                            Register
+                            {loading ? <span className="loading loading-spinner loading-md"></span> : "Register"}
                         </button>
                     </form>
 
 
                     <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer mt-6"
-                        onClick={handleGoogleSignIn}>
-                        <span className="text-lg"><BsGoogle /></span>
-                        Continue with Google
+                        onClick={handleGoogleSignIn} disabled={googleLoading}>
+                        {googleLoading ? <span className="loading loading-spinner loading-md"></span>  : 
+                        <><span className="text-lg"><BsGoogle /></span>
+                        <span>Continue with Google</span></>}
                     </button>
 
 
