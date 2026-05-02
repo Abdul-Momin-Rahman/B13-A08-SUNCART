@@ -27,7 +27,7 @@ const Navbar = () => {
 
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
-    // console.log(user)
+
 
     return (
         <div className='bg-[#fff6e9]  flex items-center h-15  lg:h-17 sticky top-0 z-50'>
@@ -40,11 +40,17 @@ const Navbar = () => {
                     <span className='text-[#EF9F27] font-bold text-2xl'>SunCart</span>
                 </div>
 
+
+
+
                 <div className='md:flex gap-8 items-center justify-between hidden'>
                     <NavLink href={'/'}>Home</NavLink>
                     <NavLink href={'/products'}>Products</NavLink>
                     <NavLink href={user ? '/myprofile' : '/login'}>My Profile</NavLink>
                 </div>
+
+
+
 
                 <div className='md:flex gap-2 items-center justify-between hidden'>
                     {user ? <Avatar>
@@ -95,11 +101,7 @@ const Navbar = () => {
                                     Products
                                 </Link>
 
-                                <Link href={user? "/myprofile" : "/login"} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={() => {
-                                    handleClick
-                                    
-
-                                }}>
+                                <Link href={user? "/myprofile" : "/login"} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
 
                                     My Profile
                                 </Link>
