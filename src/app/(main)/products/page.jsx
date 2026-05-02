@@ -3,6 +3,11 @@ import { getProductsData } from '@/lib/data';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 
+export const metadata = {
+    title: "SunCart | Products",
+    description: "A modern summer eCommerce platform where users can explore and purchase seasonal product",
+};
+
 const ProductPage = async () => {
 
     const productData = await getProductsData();

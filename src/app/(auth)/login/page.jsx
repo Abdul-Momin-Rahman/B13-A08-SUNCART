@@ -1,85 +1,17 @@
-"use client";
 
-import { authClient } from "@/lib/auth-client";
+import LoginButton from "@/components/LoginClientComponents/LoginButton";
+import LoginForm from "@/components/LoginClientComponents/LoginForm";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { BsGoogle } from "react-icons/bs";
-import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
-import { Bounce, Slide, toast } from "react-toastify";
+import { FaHome } from "react-icons/fa";
+
+
+export const metadata = {
+  title: "SunCart | Login",
+  description: "A modern summer eCommerce platform where users can explore and purchase seasonal product",
+};
 
 
 export default function LoginPage() {
-
-
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const next = searchParams.get("next");
-
-    const [loading, setLoading] = useState(false);
-    const [googleLoading, setGoogleLoading] = useState(false);
-
-    const handleGoogleSignIn = async () => {
-
-        setGoogleLoading(true);
-        const data = await authClient.signIn.social({
-            provider: "google",
-            callbackURL : next || "/",
-        });
-
-        setGoogleLoading(false);
-    }
-
-    const [showPassword, setShowPassword] = useState(false);
-
-    const { register, handleSubmit, formState: { errors } } = useForm()
-
-    const handleLogin = async (data) => {
-
-        setLoading(true);
-
-        const { email, password } = data;
-
-        const { data: res, error } = await authClient.signIn.email({
-            email: email, // required
-            password: password, // required
-            // rememberMe: true,
-            callbackURL: next || "/",
-        });
-
-        setLoading(false);
-
-        if (error) {
-            toast.error(`${error.message}`, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-        }
-        if (res) {
-            toast.success('Login Successful', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Slide,
-            });
-        }
-
-
-    };
-
 
 
     return (
@@ -102,48 +34,7 @@ export default function LoginPage() {
 
 
 
-                    <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
-
-                        <div>
-                            <label className="text-sm text-gray-600">Email address</label>
-                            <input
-                                type="email"
-                                {...register("email", { required: "Email is required for Login" })}
-                                placeholder="you@example.com"
-                                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700 text-white outline-none"
-
-                            />
-                            {errors.email && <p className="text-red-500 mt-2">{errors.email.message}</p>}
-                        </div>
-
-
-                        <div className="relative">
-                            <label className="text-sm text-gray-600">Password</label>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                {...register("password", { required: "Password is required for Login" })}
-                                placeholder="********"
-                                className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700 text-white outline-none"
-
-                            />
-                            <span className="absolute right-5 top-10 text-white cursor-pointer" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
-                            {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
-                        </div>
-
-                        <div className="flex justify-end">
-                            <div className="text-right text-sm text-orange-500 cursor-pointer hover:text-orange-800 w-fit">
-                                Forgot password?
-                            </div>
-                        </div>
-
-
-                        <button
-                            type="submit" disabled={loading}
-                            className="w-full text-lg bg-white text-[#D85A30] py-2 rounded-lg hover:bg-[#D85A30] hover:text-white border transition cursor-pointer"
-                        >
-                            {loading ? <span className="loading loading-spinner loading-md"></span> : "Login"}
-                        </button>
-                    </form>
+                    <LoginForm></LoginForm>
 
 
                     <div className="flex items-center gap-3 my-6">
@@ -153,12 +44,7 @@ export default function LoginPage() {
                     </div>
 
 
-                    <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer"
-                        onClick={handleGoogleSignIn} disabled={googleLoading}>
-                        {googleLoading ? <span className="loading loading-spinner loading-md"></span> :
-                            <><span className="text-lg"><BsGoogle /></span>
-                                <span>Continue with Google</span></>}
-                    </button>
+                    <LoginButton></LoginButton>
 
                     <p className="text-center text-sm mt-6">
                         Don&apos;t have an account?{" "}
