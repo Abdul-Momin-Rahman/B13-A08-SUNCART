@@ -9,21 +9,18 @@ import { useEffect } from "react";
 
 
 
-function Avatar({ size = 96 }) {
+function Avatar({ user, size }) {
 
 
-    const { data: session, isPending } = authClient.useSession()
-    const user = session?.user;
-
-    const initials = user.name
+    const initials = user?.name
         ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
-        : user.email[0].toUpperCase();
+        : user?.email[0].toUpperCase() || "U";
 
-    if (user.image) {
+    if (user?.image) {
         return (
             <Image
-                src={user.image}
-                alt={user.name || "Profile photo"}
+                src={user?.image}
+                alt={user?.name || "Profile photo"}
                 width={size}
                 height={size}
                 className="rounded-full object-cover border-[3px] border-[#EF9F27]"
@@ -74,15 +71,15 @@ export default function MyProfilePage() {
 
     useEffect(() => {
         if (!isPending && !user) {
-            router.push("/login");
+            router.replace("/login");
         }
 
-        if (isPending) {
-            return <div className="h-screen w-full flex justify-center items-center"><span className="loading loading-infinity loading-xl"></span></div>
-        }
     }, [isPending, user, router]);
 
 
+    if (isPending) {
+        return <div className="h-screen w-full flex justify-center items-center"><span className="loading loading-infinity loading-xl"></span></div>
+    }
 
 
     const handleSignOut = async () => {
@@ -144,18 +141,18 @@ export default function MyProfilePage() {
                             className="text-2xl font-bold text-[#1A1108] dark:text-[#FAC775] mb-0.5"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
-                            {user && user.name || "—"}
+                            {user?.name || "—"}
                         </h2>
                         <p className="text-[13px] text-[#888780]">{user.email}</p>
                     </div>
                 </div>
 
-                {/* ── Info rows card ── */}
+               
                 <div className="bg-[#FFFBF5] dark:bg-[#2C1E06] border border-[#FAC775] dark:border-[#3A2A0A] rounded-2xl px-6 py-2 mb-5">
 
                     <InfoRow
                         label="Full Name"
-                        value={user.name || "—"}
+                        value={user?.name || "—"}
                         icon={
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BA7517" strokeWidth="2" strokeLinecap="round">
                                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
@@ -166,7 +163,7 @@ export default function MyProfilePage() {
 
                     <InfoRow
                         label="Email Address"
-                        value={user.email}
+                        value={user?.email}
                         icon={
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BA7517" strokeWidth="2" strokeLinecap="round">
                                 <path d="M3 8l9 6 9-6" />
