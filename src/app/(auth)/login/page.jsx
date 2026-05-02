@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
-import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import { Bounce, Slide, toast } from "react-toastify";
 
 
@@ -85,7 +85,7 @@ export default function LoginPage() {
                     <div className="flex  items-center justify-between">
                         <p className="text-lg text-orange-500 font-semibold">LOGIN</p>
                         <Link href={'/'} className="bg-orange-500 w-8 flex justify-center items-center h-8 rounded-full hover:scale-105 hover:border border-gray-700">
-                            <FaArrowLeft />
+                            <FaHome />
                         </Link>
                     </div>
                     <h1 className="text-2xl font-bold mt-1">Welcome back</h1>
@@ -120,7 +120,7 @@ export default function LoginPage() {
                                 className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700 text-white outline-none"
 
                             />
-                            <span className="absolute right-5 top-10 text-white" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                            <span className="absolute right-5 top-10 text-white cursor-pointer" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                             {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
                         </div>
 

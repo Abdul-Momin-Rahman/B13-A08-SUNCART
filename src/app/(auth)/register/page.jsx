@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaHome } from "react-icons/fa";
 import { Bounce, Slide, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { BsGoogle } from "react-icons/bs";
@@ -14,11 +14,11 @@ import { BsGoogle } from "react-icons/bs";
 
 export default function RegisterPage() {
 
-    const [loading ,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
 
     const handleGoogleSignIn = async () => {
-        
+
         setGoogleLoading(true);
         const data = await authClient.signIn.social({
             provider: "google",
@@ -44,7 +44,7 @@ export default function RegisterPage() {
 
         const { name, email, photo, password } = data;
 
-        const { data: res, error  } = await authClient.signUp.email({
+        const { data: res, error } = await authClient.signUp.email({
             name: name, // required
             email: email, // required
             password: password, // required
@@ -97,7 +97,10 @@ export default function RegisterPage() {
 
 
                     <div className="space-y-1">
-                        <p className="text-lg text-orange-500 font-semibold">REGISTER</p>
+                        <div className="flex justify-between items-center"><p className="text-lg text-orange-500 font-semibold">REGISTER</p>
+                            <Link href={'/'} className="bg-orange-500 w-8 flex justify-center items-center h-8 rounded-full hover:scale-105 hover:border border-gray-700">
+                                <FaHome />
+                            </Link></div>
                         <h1 className="text-2xl font-bold mt-1">Create an account</h1>
                         <p className="text-gray-500 text-sm mb-6">
                             Start shopping summer deals today.
@@ -161,7 +164,7 @@ export default function RegisterPage() {
                                 className="w-full mt-1 px-4 py-2 rounded-lg bg-gray-700  text-white outline-none"
 
                             />
-                            <span className="absolute right-5 top-10 text-white " onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                            <span className="absolute right-5 top-10 text-white cursor-pointer" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                             {errors.password && <p className="text-red-500 mt-2">{errors.password.message}</p>}
                         </div>
 
@@ -170,10 +173,10 @@ export default function RegisterPage() {
 
 
                         <button
-                            disabled = {loading}
+                            disabled={loading}
                             type="submit"
                             className="w-full text-[#D85A30] bg-white  py-2 rounded-lg hover:bg-[#D85A30] hover:text-white cursor-pointer transition mt-10 text-lg"
-                            
+
                         >
                             {loading ? <span className="loading loading-spinner loading-md"></span> : "Register"}
                         </button>
@@ -182,9 +185,9 @@ export default function RegisterPage() {
 
                     <button className="w-full border py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#D85A30] hover:text-white cursor-pointer mt-6"
                         onClick={handleGoogleSignIn} disabled={googleLoading}>
-                        {googleLoading ? <span className="loading loading-spinner loading-md"></span>  : 
-                        <><span className="text-lg"><BsGoogle /></span>
-                        <span>Continue with Google</span></>}
+                        {googleLoading ? <span className="loading loading-spinner loading-md"></span> :
+                            <><span className="text-lg"><BsGoogle /></span>
+                                <span>Continue with Google</span></>}
                     </button>
 
 
