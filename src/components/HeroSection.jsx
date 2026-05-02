@@ -76,16 +76,16 @@ const HeroSection = () => {
 
                             <div className="w-full h-full bg-black/60 flex items-center">
                                 <div className="max-w-7xl mx-auto px-6 text-white ">
-                                    <h1 className="text-3xl md:text-6xl font-bold mb-4 text-center sm:text-left">
+                                    <h1 className="text-3xl md:text-6xl font-bold mb-4 text-center sm:text-left animate__animated animate__fadeInLeft">
                                         {slide.title}
                                     </h1>
-                                    <h2 className="text-xl md:text-3xl font-semibold mb-3 text-[#BA7517] text-center sm:text-left">
+                                    <h2 className="text-xl md:text-3xl font-semibold mb-3 text-[#BA7517] text-center sm:text-left ">
                                         {slide.subtitle}
                                     </h2>
-                                    <p className="mb-6 text-lg text-center sm:text-left">{slide.desc}</p>
+                                    <p className="mb-6 text-lg text-center sm:text-left animate__animated animate_fadeInRightBig">{slide.desc}</p>
 
                                     <div className="flex gap-4">
-                                        <button className="hidden sm:block bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer">
+                                        <button className="hidden sm:block bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer animate__animated animate-bounce">
                                             {slide.ctaPrimary}
                                         </button>
                                         <button className="hidden sm:block border border-white px-6 py-3 rounded-xl hover:bg-white hover:text-black transition cursor-pointer">
@@ -102,7 +102,7 @@ const HeroSection = () => {
                                         {slide.features.map((f, idx) => (
                                             <span
                                                 key={idx}
-                                                className="bg-white/20 px-3 py-1 rounded-full text-sm border-2 border-[#FAC775]"
+                                                className="bg-white/20 px-3 py-1 rounded-full text-sm border-2 border-[#FAC775] animate__animated animate__fadeInUp"
                                             >
                                                 {f}
                                             </span>

@@ -35,7 +35,7 @@ const Navbar = () => {
 
 
 
-                <div className='flex gap-0.5 items-center'>
+                <div className='flex gap-0.5 items-center animate__animated animate__flip'>
                     <Image src={SunImg} width={50} height={50} alt='SUN SVG'></Image>
                     <span className='text-[#EF9F27] font-bold text-2xl'>SunCart</span>
                 </div>
