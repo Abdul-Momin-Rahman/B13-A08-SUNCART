@@ -1,6 +1,10 @@
 @import "animate.css";
 @import "tailwindcss";
 @plugin "daisyui";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
 
 
+:root {
+    --animate-duration: 2000ms;
+    --animate-delay: 1s;
+}

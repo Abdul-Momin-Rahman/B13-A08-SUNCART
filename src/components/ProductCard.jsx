@@ -6,13 +6,14 @@ import { FaStar } from 'react-icons/fa';
 const ProductCard = ({ product }) => {
     return (
         <Link href={`/products/${product.id}`} className="card  bg-[#FFFBF5] shadow-lg hover:shadow-[#EF9F27] hover:scale-102 border border-gray-200">
-            <figure className='w-full h-full'>
+            <figure className='relative w-full h-48'>
                 <Image
-                    width={400} height={400}
+                    fill
                     src={product.image}
                     alt={product.name}
-                    className='w-full h-full object-cover'
-                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className='object-cover'
+                    
                 />
             </figure>
             <div className="card-body">

@@ -46,7 +46,7 @@ const ProfileUpdateForm = () => {
                     Full Name
                 </label>
 
-                <div className="flex items-center gap-3 h-11 bg-[#FFFBF5] border-[1.5px] border-[#FAC775] focus-within:border-[#EF9F27] rounded-xl px-4 transition-colors duration-200">
+                <div className="flex items-center gap-3 h-11 bg-[#FFFBF5] border-[1.5px] border-[#FAC775] focus-within:border-[#EF9F27] rounded-xl px-4 transition-colors duration-200 overflow-clip">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" strokeWidth="2" strokeLinecap="round" className="shrink-0">
                         <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
                     </svg>
@@ -65,7 +65,7 @@ const ProfileUpdateForm = () => {
                 <label className="block text-[12px] font-medium uppercase tracking-widest text-[#888780] mb-2">
                     Photo URL
                 </label>
-                <div className="flex items-center gap-3 h-11 bg-[#FFFBF5] border-[1.5px] border-[#FAC775] focus-within:border-[#EF9F27] rounded-xl px-4 transition-colors duration-200">
+                <div className="flex items-center gap-3 h-11 bg-[#FFFBF5] border-[1.5px] border-[#FAC775] focus-within:border-[#EF9F27] rounded-xl px-4 transition-colors duration-200 overflow-clip">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" strokeWidth="2" strokeLinecap="round" className="shrink-0">
                         <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
                     </svg>
@@ -74,7 +74,7 @@ const ProfileUpdateForm = () => {
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
                         placeholder="https://example.com/photo.jpg"
-                        className="flex-1 bg-transparent outline-none text-[13px] text-[#1A1108] placeholder-[#B4B2A9]"
+                        className="flex-1 bg-transparent outline-none text-[13px] text-[#1A1108] placeholder-[#B4B2A9] overflow-clip"
                     />
                 </div>
 
@@ -108,7 +108,7 @@ const ProfileUpdateForm = () => {
                     disabled={loading}
                     className="flex-1 h-11 bg-[#EF9F27] hover:bg-[#FAC775] text-[#1A1108] text-[13px] font-semibold rounded-full transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                 >
-                    {loading ? 'Updating...' : 'Update Information'}
+                    {loading ? 'Updating...' : 'Update'}
                 </button>
             </div>
 

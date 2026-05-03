@@ -53,7 +53,7 @@ const Navbar = () => {
 
 
                 <div className='md:flex gap-2 items-center justify-between hidden'>
-                    {user ? <Avatar>
+                    {user ? <Avatar onClick={() => route.push('/myprofile')} className='hover:scale-105 hover:ring-2 ring-orange-500 cursor-pointer'>
                         <Avatar.Image alt={user.name} src={user.image} />
                         <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
                     </Avatar> :
@@ -73,6 +73,14 @@ const Navbar = () => {
                 <div className="md:hidden ">
 
                     <div className='flex'>
+
+                        <Link href={'/myprofile'} className='mr-3' >
+                            {user ? isPending ? <span className="loading loading-ring loading-xl"></span> : <Avatar>
+                                <Avatar.Image alt={user?.name} src={user?.image} />
+                                <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
+                            </Avatar> : null}
+                        </Link>
+
                         <button
                             onClick={() => setOpen(!open)}
                             className="px-4 py-2 bg-[#fffbf557] rounded"
@@ -80,16 +88,10 @@ const Navbar = () => {
                             {open ? <CiMenuFries /> : <CiMenuBurger />}
                         </button>
 
-                        <div className='mr-3'>
-                            {user ? isPending ? <span className="loading loading-ring loading-xl"></span> : <Avatar>
-                                <Avatar.Image alt={user?.name} src={user?.image} />
-                                <Avatar.Fallback>{user.name?.split(" ").map(n => n[0]).join("").toUpperCase()}</Avatar.Fallback>
-                            </Avatar> : null}
-                        </div>
                     </div>
 
                     {open && (
-                        <div className="absolute right-0  mt-3  w-25 py-2 pl-2  bg-[#FFFBF5] shadow-lg rounded">
+                        <div className="absolute right-0  mt-3  w-25 py-2 pl-2  bg-[#FFFBF5] shadow-lg rounded animate-in ani ">
                             <ul className="flex flex-col">
                                 <Link href={'/'} className={`${path == '/' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
 
@@ -101,7 +103,7 @@ const Navbar = () => {
                                     Products
                                 </Link>
 
-                                <Link href={user? "/myprofile" : "/login"} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
+                                <Link href={user ? "/myprofile" : "/login"} className={`${path == '/myprofile' ? 'bg-[#EF9F27]' : undefined} rounded-l-xl text-center py-1`} onClick={handleClick}>
 
                                     My Profile
                                 </Link>

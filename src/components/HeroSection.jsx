@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 const slides = [
     {
@@ -11,7 +12,7 @@ const slides = [
         subtitle: "Up to 50% OFF",
         desc: "Sunglasses, outfits, skincare & more",
         img: "/images/summer1.jpg",
-        para : "Free delivery over ৳1500 • Easy returns",
+        para: "Free delivery over ৳1500 • Easy returns",
 
 
 
@@ -30,7 +31,7 @@ const slides = [
         img: "/images/summer2.jpg",
 
 
-        para : "100% Authentic Product, Try it Out today",
+        para: "100% Authentic Product, Try it Out today",
         features: ["Best Sellers", "High Quality", "Top Rated"],
 
         ctaPrimary: "View Deals",
@@ -46,7 +47,7 @@ const slides = [
         img: "/images/summer3.jpg",
 
 
-        para : "New Collection has arrived, Check it Out",
+        para: "New Collection has arrived, Check it Out",
         features: ["Lightweight", "Comfort Fit", "Stylish"],
 
         ctaPrimary: "Discover",
@@ -58,7 +59,7 @@ const slides = [
 
 const HeroSection = () => {
     return (
-        <section className="w-full h-[95vh]">
+        <section className="w-full h-screen">
             <Swiper
                 modules={[Autoplay, Pagination]}
                 autoplay={{ delay: 3000 }}
@@ -70,19 +71,28 @@ const HeroSection = () => {
                     <SwiperSlide key={i}>
 
                         <div
-                            className="h-full w-full bg-cover bg-top bg-no-repeat"
-                            style={{ backgroundImage: `url(${slide.img})` }}
-                        >
+                            className="h-screen w-full  relative">
 
-                            <div className="w-full h-full bg-black/60 flex items-center">
+                            <Image
+                                src={slide.img}
+                                alt={slide.title}
+                                fill
+                                priority
+                                quality={75}
+                                className="object-cover md:object-top-right "
+                            />
+
+                            <div className="absolute inset-0 bg-black/55" />
+
+                            <div className="absolute inset-0 w-full h-full flex items-center">
                                 <div className="max-w-7xl mx-auto px-6 text-white ">
                                     <h1 className="text-3xl md:text-6xl font-bold mb-4 text-center sm:text-left animate__animated animate__fadeInLeft">
                                         {slide.title}
                                     </h1>
-                                    <h2 className="text-xl md:text-3xl font-semibold mb-3 text-[#BA7517] text-center sm:text-left ">
+                                    <h2 className="text-xl md:text-3xl font-semibold mb-3 text-[#BA7517]  text-center sm:text-left ">
                                         {slide.subtitle}
                                     </h2>
-                                    <p className="mb-6 text-lg text-center sm:text-left animate__animated animate_fadeInRightBig">{slide.desc}</p>
+                                    <p className="mb-6 text-lg  text-center sm:text-left animate__animated animate_fadeInRightBig">{slide.desc}</p>
 
                                     <div className="flex gap-4">
                                         <button className="hidden sm:block bg-[#EF9F27] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition cursor-pointer animate__animated animate-bounce">
@@ -94,7 +104,7 @@ const HeroSection = () => {
                                     </div>
 
 
-                                    <p className="mt-4 text-lg opacity-80 text-center sm:text-left">
+                                    <p className="mt-4 text-lg  text-center sm:text-left">
                                         {slide.para}
                                     </p>
 

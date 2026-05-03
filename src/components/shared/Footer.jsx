@@ -102,7 +102,7 @@ const Footer = () => {
                     <p className="text-[#888780] text-xs leading-relaxed mb-3">
                         Get summer deals straight to your inbox.
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap ">
                         <input
                             type="email"
                             placeholder="Give your @email"
