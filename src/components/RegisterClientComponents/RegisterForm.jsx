@@ -64,7 +64,7 @@ const RegisterForm = () => {
                 transition: Slide,
             });
 
-            router.push('/')
+            router.push('/login')
         }
     };
 
